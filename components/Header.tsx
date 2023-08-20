@@ -3,8 +3,14 @@
 import Image from "next/image";
 import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import Avatar from "react-avatar";
+import { useBoardStore } from "@/store/BoardStore";
 
 function Header() {
+  const [searchString, setSearchString] = useBoardStore((state) => [
+    state.searchString,
+    state.setSearchString,
+  ]);
+
   return (
     <header>
       <div className="flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-b-2xl">
@@ -15,17 +21,19 @@ function Header() {
           alt="Trello logo"
           width={300}
           height={100}
-          className="w-44 md:w-56 pb-10 md:pb-0 object-contain cursor-pointer"
+          className="w-32 md:w-40 pb-10 md:pb-0 object-contain cursor-pointer"
         />
 
         <div className="flex items-center space-x-5 flex-1 justify-end w-full">
           {/* Search Box */}
-          <form className="flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial">
-            <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
+          <form className="flex items-center space-x-2 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial">
+            <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
             <input
               type="text"
               placeholder="Search"
-              className="flex-1 outline-none p-2"
+              className="flex-1 outline-none p-1 text-gray-400 text-sm bg-transparent"
+              value={searchString}
+              onChange={(e) => setSearchString(e.target.value)}
             />
             <button hidden type="submit">
               Search
@@ -33,7 +41,7 @@ function Header() {
           </form>
 
           {/* Avatar */}
-          <Avatar name="Carlos Gomes" round color="#0055D1" size="50" />
+          <Avatar name="Carlos Gomes" round color="#0055D1" size="45" />
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import { PlusCircleIcon } from "@heroicons/react/20/solid";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import TodoCard from "./TodoCard";
 import { useBoardStore } from "@/store/BoardStore";
+import { useModalStore } from "@/store/ModalStore";
 
 type Props = {
   id: TypedColumn;
@@ -22,7 +23,17 @@ function Column({ id, todos, index }: Props) {
     return todo.title.toLowerCase().includes(searchString.toLowerCase());
   };
 
-  const [searchString] = useBoardStore((state) => [state.searchString]);
+  const [searchString, setNewTaskType] = useBoardStore((state) => [
+    state.searchString,
+    state.setNewTaskType,
+  ]);
+
+  const openModal = useModalStore((state) => state.openModal);
+
+  const handleAddTodo = () => {
+    setNewTaskType(id);
+    openModal();
+  };
 
   return (
     <Draggable draggableId={id} index={index}>
@@ -38,7 +49,7 @@ function Column({ id, todos, index }: Props) {
               <div
                 {...provided.droppableProps}
                 ref={provided.innerRef}
-                className={`p-2 rounded-2xl shadow-sm ${
+                className={`p-4 rounded-2xl shadow-sm ${
                   snapshot.isDraggingOver ? "bg-green-200" : "bg-white/50"
                 }`}
               >
@@ -81,8 +92,11 @@ function Column({ id, todos, index }: Props) {
                   {provided.placeholder}
 
                   {/* render the add todo button */}
-                  <div className="flex justify-end items-end">
-                    <button className="text-green-500 hover:text-green-600">
+                  <div className="flex justify-end items-end px-0">
+                    <button
+                      onClick={handleAddTodo}
+                      className="text-green-500 hover:text-green-600"
+                    >
                       <PlusCircleIcon className="h-10 w-10" />
                     </button>
                   </div>

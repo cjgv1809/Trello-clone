@@ -12,10 +12,10 @@ interface Column {
 interface Todo {
   $id: string;
   $createdAt: string;
-  $databaseId: string;
-  $collectionId: string;
-  $permissions: string[];
-  $updatedAt: string;
+  $databaseId?: string;
+  $collectionId?: string;
+  $permissions?: string[];
+  $updatedAt?: string;
   title: string;
   status: TypedColumn;
   image?: Image;

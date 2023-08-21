@@ -69,12 +69,8 @@ function Board() {
       const newCol = { ...startCol, todos: newTodos };
       const newColumns = new Map(board.columns);
       newColumns.set(newCol.id, newCol);
-      console.log("newCol", newCol);
-      console.log("newColumns", newColumns);
-      console.log("newTodos", newTodos);
 
       setBoardState({ ...board, columns: newColumns });
-      console.log("board", board);
     } else {
       // dragging from one column to another
       const finishTodos = Array.from(finishCol.todos);
@@ -84,17 +80,9 @@ function Board() {
       newFinishColumns.set(newFinishCol.id, newFinishCol);
 
       // update in the database
-      console.log("finishCol", finishCol);
-      console.log("newFinishCol", newFinishCol);
-      console.log("newFinishColumns", newFinishColumns);
-      console.log("todoMoved", todoMoved);
-      console.log("newFinishCol.id", newFinishCol.id);
-      console.log("finishTodos", finishTodos);
-
       updateTodoInDB(todoMoved, newFinishCol.id);
 
       setBoardState({ ...board, columns: newFinishColumns });
-      console.log("board", board);
     }
   };
 

@@ -73,9 +73,6 @@ function Board() {
       console.log("newColumns", newColumns);
       console.log("newTodos", newTodos);
 
-      // updateTodosOrderInDB(newTodos, newCol.id);
-      // updateTodoInDB(todoMoved, newCol.id);
-
       setBoardState({ ...board, columns: newColumns });
       console.log("board", board);
     } else {
@@ -106,7 +103,7 @@ function Board() {
       <Droppable droppableId="board" direction="horizontal" type="column">
         {(provided) => (
           <div
-            className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5 max-w-xs sm:max-w-xl md:max-w-2xl xl:max-w-7xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-5 max-w-xs sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >

@@ -10,7 +10,7 @@ interface BoardState {
   updateTodoInDB: (todo: Todo, columnId: TypedColumn) => void;
   newTaskInput: string;
   setNewTaskInput: (newTaskInput: string) => void;
-  // updateTodosOrderInDB: (todos: Todo[], columnId: TypedColumn) => void;
+
   image: File | null;
   setImage: (image: File | null) => void;
   searchString: string;
@@ -146,31 +146,4 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       }
     );
   },
-
-  // remember the order of the todos in each column and update the database to reflect this order when a todo is moved to a different column or reordered in the same column
-  // updateTodosOrderInDB: async (todos, columnId) => {
-  //   // sort todos by order
-  //   const todosWithOrder = todos.sort((a, b) => {
-  //     return a.order! - b.order!;
-  //   });
-
-  //   console.log("todosWithOrder", todosWithOrder);
-
-  //   // update the database with the new order of the todos and their new column id
-  //   await Promise.all(
-  //     todosWithOrder.map(async (todo) => {
-  //       const { $id, title, order } = todo;
-  //       await databases.updateDocument(
-  //         process.env.NEXT_PUBLIC_DATABASE_ID!,
-  //         process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!,
-  //         $id,
-  //         {
-  //           title,
-  //           status: columnId,
-  //           order,
-  //         }
-  //       );
-  //     })
-  //   );
-  // },
 }));
